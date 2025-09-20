@@ -1,0 +1,40 @@
+<%- include('partials/header', { title: 'Trang chủ' }) %>
+
+<h1 class="mb-4">Danh sách sản phẩm</h1>
+
+<form class="row g-3 mb-4" method="GET" action="/">
+  <div class="col-md-4">
+    <select name="supplier" class="form-select">
+      <option value="">-- Chọn nhà cung cấp --</option>
+      <% suppliers.forEach(s => { %>
+        <option value="<%= s._id %>" <%= selectedSupplier == s._id ? 'selected' : '' %>><%= s.name %></option>
+      <% }) %>
+    </select>
+  </div>
+  <div class="col-md-4">
+    <input type="text" name="search" class="form-control" placeholder="Tìm theo tên sản phẩm" value="<%= searchQuery || '' %>">
+  </div>
+  <div class="col-md-4">
+    <button class="btn btn-primary w-100" type="submit">Tìm kiếm</button>
+  </div>
+</form>
+
+<div class="row">
+  <% if (products.length === 0) { %>
+    <p class="text-muted">Không có sản phẩm nào.</p>
+  <% } else { %>
+    <% products.forEach(p => { %>
+      <div class="col-md-4 mb-3">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title"><%= p.name %></h5>
+            <p class="card-text">Giá: <%= p.price %> | Số lượng: <%= p.quantity %></p>
+            <p class="card-text"><small class="text-muted">Nhà cung cấp: <%= p.supplier.name %></small></p>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>

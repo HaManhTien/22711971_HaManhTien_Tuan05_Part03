@@ -1,0 +1,26 @@
+<%- include('../partials/header', { title: supplier._id ? 'Sửa nhà cung cấp' : 'Thêm nhà cung cấp' }) %>
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow-sm p-4">
+      <h2 class="mb-3"><%= supplier._id ? 'Sửa nhà cung cấp' : 'Thêm nhà cung cấp' %></h2>
+      <form action="<%= supplier._id ? '/suppliers/edit/' + supplier._id : '/suppliers/add' %>" method="POST">
+        <div class="mb-3">
+          <label class="form-label">Tên</label>
+          <input type="text" name="name" class="form-control" required value="<%= supplier.name || '' %>">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Địa chỉ</label>
+          <input type="text" name="address" class="form-control" value="<%= supplier.address || '' %>">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Số điện thoại</label>
+          <input type="text" name="phone" class="form-control" value="<%= supplier.phone || '' %>">
+        </div>
+        <button class="btn btn-primary w-100" type="submit"><%= supplier._id ? 'Cập nhật' : 'Thêm' %></button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
